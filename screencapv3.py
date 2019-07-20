@@ -11,11 +11,9 @@ if __name__ == '__main__':
 
         comport = sys.argv[1]
         addr = sys.argv[2]
-
         ser = serial.Serial()
 
         try:
-                success=True
                 ser = serial.Serial(sys.argv[1], 9600, timeout = 2.0)
                 print("Setting up usb-gpib device")
                 ser.write('++mode 1\n')
@@ -28,7 +26,7 @@ if __name__ == '__main__':
                 s = ser.read(65536)
                 f = open("scope_output.txt","w")
                 f.write(s)
-                print("Done writing to file!  Use HP2xx to convert to image.")
+                print("Done writing to file!  Using HP2xx to convert to png image.")
 
                 subprocess.call(["hp2xx","-c","12345","-f","conv_screencap.png","-m","png","scope_output.txt"])
                 print("Finished converting image to png")
